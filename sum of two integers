@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int getSum(int a, int b) {
+        int carry=0 ; //记录要进位的位置
+        while(a!=0)
+        {
+            carry=a&b;
+            b=a^b;
+            a=carry<<1;
+            
+        }
+        return b;
+    }
+};
