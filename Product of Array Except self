@@ -1,0 +1,13 @@
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+    
+ int n = nums.size();
+        vector<int> prod(n, 1);//创建一个大小为n数组，值均为1
+        for (int i = 1; i < n; i++)
+            prod[i] = prod[i - 1] * nums[i - 1];//n-1    prod数组储存除当前位之前所有数乘积
+        for (int i = n - 1, r = 1; i >= 0; r *= nums[i--])  //r记录了当前位之后所有数乘积
+            prod[i] *= r;//n   
+        return prod; 
+    }
+};
