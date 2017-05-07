@@ -1,24 +1,32 @@
-/*heap 要自己手动申请和释放空间*/
-/*hash bucket store*/
 class Solution {
 public:
+    /*vector<int>  容器，可以简单的当做数组看待，内的元素可以是数组字符串甚至是结构体，使用时结构体定义要放在全局*/
     vector<int> topKFrequent(vector<int>& nums, int k) {
-        unordered_map<int, int> m;
-        for (int num : nums)
-            ++m[num];
-        
-        vector<vector<int>> buckets(nums.size() + 1); 
-        for (auto p : m)
-            buckets[p.second].push_back(p.first);
-        
-        vector<int> ans;
-        for (int i = buckets.size() - 1; i >= 0 && ans.size() < k; --i) {
-            for (int num : buckets[i]) {
-                ans.push_back(num);
-                if (ans.size() == k)
-                    break;
-            }
+        /*pair类型，一种模板类型，每个pair里面可以存放两个值，这两种值得类型无限制，可以是结构体*/
+        /* priority_queue优先队列的一种，不过它可以按照自定义的一种方式（数据的优先级）来对队列中的数据进行动态的排序每次的push和pop操作，队列都会动态的调整，以达到我们预期的方式来存储。例如：我们常用的操作就是对数据排序，优先队列默认（可以自定义比较方法）的是数据大的优先级高所以我们无论按照什么顺序push一堆数，最终在队列里总是pop出最大的元素。*/
+        /*在我们这道题中的 priority_queue中，第一个参数代表数据类型，第二个参数代表装这种数据类型的容器，第三个参数代表的是优先级的定义方法（这道题的定义方法是数据从小到大排列）*/
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        /*unordered_map类似于java中的哈希表，优点是查询时间复杂度只有O（1），都是存储的ke-value的值，可以通过key快速索引到value。
+        .first代表key值，.second代表value值*/
+        unordered_map<int, int> cnt;
+        /*auto是系统自己帮我们判断数据的类型，简化工作量*/
+        /*初始化cnt*/
+        for (auto num : nums) cnt[num]++;
+        /*把cnt push在pq中*/
+        for (auto kv : cnt) {
+            /*我们为什么先push  .secoud?     因为我们输出的时候按照元素个数的多少（从多到少）来输出  .secoud代表了个数*/
+            pq.push({kv.second, kv.first});
+            /*如果超出个数，把现在元素个数最小的元素弹出*/
+            while (pq.size() > k) pq.pop();
         }
-        return ans;
+        
+        
+        vector<int> res;
+        while (!pq.empty()) {
+            /*push_back在vector尾部插入一个数据*/
+            res.push_back(pq.top().second);
+            pq.pop();
+        }
+        return res;
     }
 };
