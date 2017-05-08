@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        unordered_map<int ,int> cnt;
+        for(auto num:nums) cnt[num]++;
+        for (auto kv : cnt) {
+       /*尽量不要出现除法，比如这道题中的<n/2，我们用等式两边同时乘以2消去乘法，不然在一些边缘用例中会失败*/
+          if (2*kv.second>nums.size())
+             return kv.first;
+        }
+        return 0;
+    }
+};
