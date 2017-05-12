@@ -1,0 +1,41 @@
+/**
+ * Inorder Traversal 中序遍历
+ * Preorder Traversal 前序遍历
+ * Postorder Traversal  后序遍历
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode *root) {
+        //声明动态数组作为返回变量
+        vector<int> vector;
+        //声明栈
+        stack<TreeNode *> stack;
+        //取出根节点
+        TreeNode *pCurrent = root;
+        
+        while(!stack.empty() || pCurrent)
+        {
+            if(pCurrent)
+            {
+                stack.push(pCurrent);
+                pCurrent = pCurrent->left;
+            }
+            else
+            {
+                TreeNode *pNode = stack.top();
+                //在尾部插入值
+                vector.push_back(pNode->val);
+                stack.pop();
+                pCurrent = pNode->right;
+            }
+        }
+        return vector;
+    }
+};
