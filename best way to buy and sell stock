@@ -1,0 +1,27 @@
+/* 给出一个数组，表示每个时间点的股票价格，选择买入和卖出时间*/
+//本方法为待改进方法，在测试用例为[1000......1]时运行超时
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int len=prices.size();
+        vector<int> differ;
+        int count=0;
+        int res=0;
+        //保存所有差值信息//
+        for (int i=0;i<len;i++){
+            for (int j=i+1;j<len;j++){
+                differ.push_back(prices[j]-prices[i]);
+                count++;
+            }
+        }
+       sort (differ.begin(),differ.end());
+           for (int i=0;i<count;i++)
+           {
+               if(differ[count-i-1]>=0){
+               res=differ[count-i-1];
+               break;}
+           
+           }
+          return res; 
+       }
+   };
