@@ -1,0 +1,27 @@
+//带有循环的解决办法，除以三有余数则不是，0除外
+class Solution {
+public:
+    bool isPowerOfThree(int n) {
+       for (;n>0&&n%3==0;){
+           n=n/3;
+        }
+       return (n==1)? true:false;
+    }
+};
+//利用数学中的log
+/*fmod(x,y)取浮点数的余，%只能用于整数。
+class Solution {
+public:
+    bool isPowerOfThree(int n) {
+        return fmod(log10(n)/log10(3), 1)==0;
+    }
+};
+*/
+
+/*一种投机取巧的方法
+public class Solution {
+public boolean isPowerOfThree(int n) {
+    // 1162261467 is 3^19,  3^20 is bigger than int  
+    return ( n>0 &&  1162261467%n==0);
+}
+*/
