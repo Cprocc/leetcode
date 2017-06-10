@@ -1,0 +1,36 @@
+/*/计算可能出现的路径条数，本质m-1个down操作和n-1个right操作的排列
+//下面的代码没有ac 提示错误input100 1时17 line 除数出现0，感觉有可能是int的存储问题
+//而且第三个循环前半段的计算多余
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+       int q=m-1,r=n-1;
+       long int   res1=1,res2=1,res3=1;
+       for (int i=1;i<=q;i++){
+           res1*=i;
+       }
+       for (int i=1;i<=r;i++){
+           res2*=i;
+       }
+       for (int i=1;i<=q+r;i++){
+           res3*=i;
+       }
+    return (int) res3/(res1*res2);
+    }
+};
+
+*/
+//change function
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        
+        if(m <=0 || n <= 0) return 0;
+        //long long的存贮是64位的
+        long int  res = 1;
+        for(int i = n; i < m+n-1 ; i++){
+            res = res * i / (i- n + 1);
+        }
+        return (int)res;
+    }
+};
