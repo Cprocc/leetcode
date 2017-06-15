@@ -1,4 +1,5 @@
 //输出最大的和，个人感觉应该用分治算法，，太麻烦了写不出来，所以用了两次搜索，应该能解决不是很刁钻的问题，比如全是负数
+//只通过了1/2的测试用例，待改进
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
@@ -19,8 +20,11 @@ public:
             temp[i]=sum;
             if (temp[i]>temp[indexr])  indexr=i;
         }
+        //判断下标的前后
+        int left=(indexl<=indexr)?indexl:indexr;
+        int right=(indexl>indexr)?indexl:indexr;
         
-        for(int i=indexl;i<=indexr;i++){
+        for(int i=left;i<=right;i++){
             maxsum+=nums[i];
         }
         return maxsum;
