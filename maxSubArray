@@ -4,8 +4,26 @@ class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
         int len=nums.size();
-        int indexl=0,indexr=len-1,maxsum=0;
-        int temp[len];
+        int mockl=0,mockr=0;
+        //将数组有效长度减少（从第一个不为0的数，到最后一个不为0的数）
+        for(int i=0;i<len;i++){
+         if(nums[i]>=0) {mockl=i;break;} 
+         else mockl=0;
+        }
+         for(int i=len-1;i>=0;i--){
+         if(nums[i]>=0) {mockr=i;break;}
+         else mockr=0;
+        }
+        //需要修改
+        if(mockl==mockr) {
+        for(int i=0;i<len;i++){
+         if(nums[i]>=0) {mockl=i;break;} 
+         else mockl=0;
+        }
+        }
+          
+        int indexl=0, indexr=len-1,maxsum=0;
+        int temp[mockr-mock1];
         // 从左往右，计算加和，并保存在temp数组中
 
         for (int i=0,sum=0;i<len;i++){
