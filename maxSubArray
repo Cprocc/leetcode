@@ -1,9 +1,6 @@
 //输出最大的和，个人感觉应该用分治算法，，太麻烦了写不出来，所以用了两次搜索，应该能解决不是很刁钻的问题，比如全是负数
 //只通过了1/2的测试用例，待改进
-//增加了正数的判断，起始位置和结束为止都以正数开始，解决了负数问题，通过率3/4
-//新问题，当出现两个最大值的时候无法选择比如 1 2 -1  -2  1  2，此时无法选择 因为原始方法定义后的index范围为5  0解决
-//新问题，0 -3 1 1
-class Solution {
+/*class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
         int len=nums.size();
@@ -37,7 +34,7 @@ public:
             sum+=nums[i];
             temp[i]=sum;
                     // 和最大的下标保存在indexl中
-            if (temp[i]>temp[indexl])  indexl=i;
+            if (temp[i]>=temp[indexl])  indexl=i;
         }
         
         for (int i=len-1,sum=0;i>=0;i--){
@@ -53,5 +50,21 @@ public:
             maxsum+=nums[i];
         }
         return maxsum;
+    }
+};*/
+//讨论中学到的方法，
+//善于简化程序  max(a,b) 
+//思路：sum保存各位累加的和，ans取sum和ans中最大的那个，如果sum<0,将sum变为0
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int n=nums.size();
+        int ans=nums[0],i,j,sum=0;
+        for(i=0;i<n;i++){
+            sum+=nums[i];
+            ans=max(sum,ans);
+            sum=max(sum,0);
+        }
+        return ans;
     }
 };
