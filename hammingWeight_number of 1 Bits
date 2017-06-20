@@ -1,0 +1,20 @@
+/*
+按照posix(可移植操作系统接口)标准，一般整形对应的*_t类型为：
+1字节     uint8_t
+2字节     uint16_t
+4字节     uint32_t
+8字节     uint64_t
+*/
+class Solution {
+public:
+    int hammingWeight(uint32_t n)
+    {
+    int res = 0;
+    while(n)
+    {
+        n &= n - 1;
+        ++ res;
+    }
+    return res;
+    }
+};
