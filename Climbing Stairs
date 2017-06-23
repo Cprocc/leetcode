@@ -1,5 +1,6 @@
 //出现过的错误，测试用例n从1到45，最初44和45一直不通过，后来吧int func改成 long int func；count 改成long count通过
 //可能是第九行的除数太大越界
+
 class Solution {
 public:
     int count=0;
