@@ -1,0 +1,26 @@
+//第一感觉，二叉树深度搜索
+//一次遍历动态调整
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int n=nums.size();
+        int a = 0;
+        int b = 0;
+    
+    for (int i=0; i<n; i++)
+    {
+        if (i%2==0)
+        //偶数情况   最简单的情况全取偶数位，或奇数位。
+        //需要调整的情况，当前n位偶数的和小于前n-1位偶数,跨过第n位偶数不取，直接取前n-1位奇数的和
+        {
+            a = max(a+nums[i], b);
+        }
+        else
+        {
+            b = max(a, b+nums[i]);
+        }
+    }
+    
+    return max(a, b);
+    }
+};
