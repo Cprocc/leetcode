@@ -1,0 +1,19 @@
+//将一个整数加一，这个整数存放在数组中，数组的低位表示整数的高位
+/*从最后一位开实判断，
+      如果某位小于9就++，输出，
+             如果某几位一直不小于9就在第一个碰到的小于9的地方进位，并将之前的整数低位全部变为0
+      如果所有位置都等于9，就增加一位高位为1，其他的地方变为0；
+      */
+
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+    
+        for (int i=digits.size(); i--; digits[i] = 0)
+            if (digits[i]++ <9)
+            return digits;
+    digits[0]++;
+    digits.push_back(0);
+    return digits;
+}
+};
