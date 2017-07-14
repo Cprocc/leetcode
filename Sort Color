@@ -69,6 +69,9 @@ public:
           H
 
     Mid <= High is our exit case
+    
+    
+    
 void sortColors(vector<int>& nums) {
     int r=0, w=0, b=0;                // label the end of different colors;
     for(int num: nums){
