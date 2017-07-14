@@ -1,0 +1,20 @@
+//这题目的意思不是很明白，难道是统计0,1,2的个数吗，试试吧
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+       int n=nums.size();
+       int count[3]={0,0,0};
+        
+        for(int i=0;i<n;i++)
+        {
+            if (nums[i]==0) count[0]++;
+              else if (nums[i]==1) count[1]++;
+                   else count[2]++;
+        }
+        
+         for (int i=0;i<count[0];i++){nums[i]=0;}
+         for (int i=0;i<count[1];i++){nums[count[0]+i]=1;}
+         for (int i=0;i<count[2];i++){nums[count[1]+count[0]+i]=2;}
+            
+    }
+};
